@@ -8,12 +8,12 @@ const getTickets = async () => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch topics");
+      throw new Error("Kunne ikke hente sak");
     }
 
     return res.json();
   } catch (error) {
-    console.log("Error loading topics: ", error);
+    console.log("Feil ved innlasting av sak: ", error);
   }
 };
 
@@ -22,7 +22,7 @@ const Dashboard = async () => {
 
   // Make sure we have tickets needed for production build.
   if (!data?.tickets) {
-    return <p>No tickets.</p>;
+    return <p>Ingen sak.</p>;
   }
 
   const tickets = data.tickets;

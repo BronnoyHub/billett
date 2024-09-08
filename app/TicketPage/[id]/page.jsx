@@ -7,7 +7,7 @@ const getTicketById = async (id) => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch topic");
+      throw new Error("Kunne ikke hente sak");
     }
 
     return res.json();
@@ -18,14 +18,14 @@ const getTicketById = async (id) => {
 
 let updateTicketData = {};
 const TicketPage = async ({ params }) => {
-  const EDITMODE = params.id === "new" ? false : true;
+  const EDITMODE = params.id === "ny" ? false : true;
 
   if (EDITMODE) {
     updateTicketData = await getTicketById(params.id);
     updateTicketData = updateTicketData.foundTicket;
   } else {
     updateTicketData = {
-      _id: "new",
+      _id: "ny",
     };
   }
 

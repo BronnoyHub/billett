@@ -10,8 +10,8 @@ config.autoAddCss = false;
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ticket System",
-  description: "Creating a functional ticketing system.",
+  title: "BronnoyHub IT-hjelp",
+  description: "Laget med Next og MongoDB.",
 };
 
 export default function RootLayout({ children }) {

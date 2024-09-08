@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json({ tickets }, { status: 200 });
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ message: "Error", err }, { status: 500 });
+    return NextResponse.json({ message: "Feil", err }, { status: 500 });
   }
 }
 
@@ -19,9 +19,9 @@ export async function POST(req) {
 
     await Ticket.create(ticketData);
 
-    return NextResponse.json({ message: "Ticket Created" }, { status: 201 });
+    return NextResponse.json({ message: "Sak opprettet" }, { status: 201 });
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ message: "Error", err }, { status: 500 });
+    return NextResponse.json({ message: "Feil", err }, { status: 500 });
   }
 }

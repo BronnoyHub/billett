@@ -3,24 +3,24 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const EditTicketForm = ({ ticket }) => {
-  const EDITMODE = ticket._id === "new" ? false : true;
+  const EDITMODE = ticket._id === "ny" ? false : true;
   const router = useRouter();
   const startingTicketData = {
     title: "",
     description: "",
     priority: 1,
     progress: 0,
-    status: "not started",
-    category: "Hardware Problem",
+    status: "ikke startet",
+    category: "Maskinvareproblem",
   };
 
   if (EDITMODE) {
-    startingTicketData["title"] = ticket.title;
-    startingTicketData["description"] = ticket.description;
-    startingTicketData["priority"] = ticket.priority;
-    startingTicketData["progress"] = ticket.progress;
+    startingTicketData["tittel"] = ticket.title;
+    startingTicketData["beskrivelse"] = ticket.description;
+    startingTicketData["prioritet"] = ticket.priority;
+    startingTicketData["framgang"] = ticket.progress;
     startingTicketData["status"] = ticket.status;
-    startingTicketData["category"] = ticket.category;
+    startingTicketData["kategori"] = ticket.category;
   }
 
   const [formData, setFormData] = useState(startingTicketData);
@@ -47,7 +47,7 @@ const EditTicketForm = ({ ticket }) => {
         body: JSON.stringify({ formData }),
       });
       if (!res.ok) {
-        throw new Error("Failed to update ticket");
+        throw new Error("Kunne ikke oppdatere sak");
       }
     } else {
       const res = await fetch("/api/Tickets", {
@@ -57,7 +57,7 @@ const EditTicketForm = ({ ticket }) => {
         "Content-Type": "application/json",
       });
       if (!res.ok) {
-        throw new Error("Failed to create ticket");
+        throw new Error("Kunne ikke opprette sak");
       }
     }
 
@@ -66,10 +66,10 @@ const EditTicketForm = ({ ticket }) => {
   };
 
   const categories = [
-    "Hardware Problem",
-    "Software Problem",
-    "Application Deveopment",
-    "Project",
+    "Maskinvareproblem",
+    "Programvareproblem",
+    "Applikasjonsutvikling",
+    "Projekt",
   ];
 
   return (
@@ -79,8 +79,8 @@ const EditTicketForm = ({ ticket }) => {
         method="post"
         className="flex flex-col gap-3 w-1/2"
       >
-        <h3>{EDITMODE ? "Update Your Ticket" : "Create New Ticket"}</h3>
-        <label>Title</label>
+        <h3>{EDITMODE ? "Oppdater billetten din" : "Opprett ny billett"}</h3>
+        <label>Tittel</label>
         <input
           id="title"
           name="title"
@@ -89,7 +89,7 @@ const EditTicketForm = ({ ticket }) => {
           required={true}
           value={formData.title}
         />
-        <label>Description</label>
+        <label>Beskrivelse</label>
         <textarea
           id="description"
           name="description"
@@ -98,7 +98,7 @@ const EditTicketForm = ({ ticket }) => {
           value={formData.description}
           rows="5"
         />
-        <label>Category</label>
+        <label>Kategori</label>
         <select
           name="category"
           value={formData.category}
@@ -111,7 +111,7 @@ const EditTicketForm = ({ ticket }) => {
           ))}
         </select>
 
-        <label>Priority</label>
+        <label>Prioritet</label>
         <div>
           <input
             id="priority-1"
@@ -159,7 +159,7 @@ const EditTicketForm = ({ ticket }) => {
           />
           <label>5</label>
         </div>
-        <label>Progress</label>
+        <label>Framgang</label>
         <input
           type="range"
           id="progress"
@@ -178,7 +178,7 @@ const EditTicketForm = ({ ticket }) => {
         <input
           type="submit"
           className="btn max-w-xs"
-          value={EDITMODE ? "Update Ticket" : "Create Ticket"}
+          value={EDITMODE ? "Oppdater sak" : "Opprett sak"}
         />
       </form>
     </div>

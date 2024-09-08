@@ -19,10 +19,10 @@ export async function PUT(req, { params }) {
       ...ticketData,
     });
 
-    return NextResponse.json({ message: "Ticket updated" }, { status: 200 });
+    return NextResponse.json({ message: "Sak oppdatert" }, { status: 200 });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ message: "Error", error }, { status: 500 });
+    return NextResponse.json({ message: "Feil", error }, { status: 500 });
   }
 }
 
@@ -31,9 +31,9 @@ export async function DELETE(req, { params }) {
     const { id } = params;
 
     await Ticket.findByIdAndDelete(id);
-    return NextResponse.json({ message: "Ticket Deleted" }, { status: 200 });
+    return NextResponse.json({ message: "Sak slettet" }, { status: 200 });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ message: "Error", error }, { status: 500 });
+    return NextResponse.json({ message: "Feil", error }, { status: 500 });
   }
 }
