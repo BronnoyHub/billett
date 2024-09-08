@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const EditTicketForm = ({ ticket }) => {
-  const EDITMODE = ticket._id === "ny" ? false : true;
+  const EDITMODE = ticket._id === "new" ? false : true;
   const router = useRouter();
   const startingTicketData = {
     title: "",
@@ -15,12 +15,12 @@ const EditTicketForm = ({ ticket }) => {
   };
 
   if (EDITMODE) {
-    startingTicketData["tittel"] = ticket.title;
-    startingTicketData["beskrivelse"] = ticket.description;
-    startingTicketData["prioritet"] = ticket.priority;
-    startingTicketData["framgang"] = ticket.progress;
+    startingTicketData["title"] = ticket.title;
+    startingTicketData["description"] = ticket.description;
+    startingTicketData["priority"] = ticket.priority;
+    startingTicketData["progress"] = ticket.progress;
     startingTicketData["status"] = ticket.status;
-    startingTicketData["kategori"] = ticket.category;
+    startingTicketData["category"] = ticket.category;
   }
 
   const [formData, setFormData] = useState(startingTicketData);
@@ -79,7 +79,7 @@ const EditTicketForm = ({ ticket }) => {
         method="post"
         className="flex flex-col gap-3 w-1/2"
       >
-        <h3>{EDITMODE ? "Oppdater billetten din" : "Opprett ny billett"}</h3>
+        <h3>{EDITMODE ? "Oppdater saken din" : "Opprett ny sak"}</h3>
         <label>Tittel</label>
         <input
           id="title"
@@ -171,9 +171,9 @@ const EditTicketForm = ({ ticket }) => {
         />
         <label>Status</label>
         <select name="status" value={formData.status} onChange={handleChange}>
-          <option value="not started">Not Started</option>
-          <option value="started">Started</option>
-          <option value="done">Done</option>
+          <option value="not started">Ikke startet</option>
+          <option value="started">Startet</option>
+          <option value="done">Ferdig</option>
         </select>
         <input
           type="submit"
